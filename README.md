@@ -1,2 +1,3 @@
-# redux-studies
+# Redux studies
+
 Redux studies
