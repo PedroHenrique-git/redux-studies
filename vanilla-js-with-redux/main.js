@@ -2,7 +2,10 @@ import { executeTests } from './testes.js';
 
 (function() {
     'use strict'
-    
+
+    const $counter = document.querySelector('.counter');
+    const $increment = document.querySelector('.increment');
+    const $decrement = document.querySelector('.decrement');
     
     const counter = (state = 0, action) => {
         switch(action.type) {
@@ -14,14 +17,22 @@ import { executeTests } from './testes.js';
 
     const { createStore } = Redux;
     const store = createStore(counter);
-
+    
+    $decrement.addEventListener('click', decrement, false);
+    $increment.addEventListener('click', increment, false);
+    
+    function decrement() {
+        store.dispatch({ type: 'DECREMENT' });
+    }
+    
+    function increment() {
+        store.dispatch({ type: 'INCREMENT' });
+    }
+    
     store.subscribe(() => {
-        console.log('disparou uma ação ', store.getState());
+        const state = store.getState();
+        $counter.textContent = state;
     });
-
-    store.dispatch({ type: 'INCREMENT' });
-    store.dispatch({ type: 'INCREMENT' });
-    store.dispatch({ type: 'DECREMENT' });
 
     executeTests(counter);
 })();
