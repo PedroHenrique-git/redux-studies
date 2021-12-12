@@ -5,7 +5,7 @@ import store from "./modules/store";
 export default function App(): JSX.Element {
   return (
     <Provider store={store}>
-        <Counter />
+      <Counter />
     </Provider>
   );
 }
