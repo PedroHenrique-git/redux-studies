@@ -1,3 +1,4 @@
+import myCreateStore from './my-create-store.js';
 import { executeTests } from './testes.js';
 
 (function() {
@@ -16,7 +17,7 @@ import { executeTests } from './testes.js';
     };
 
     const { createStore } = Redux;
-    const store = createStore(counter);
+    const store = myCreateStore(counter);
     
     $decrement.addEventListener('click', decrement, false);
     $increment.addEventListener('click', increment, false);
@@ -28,11 +29,22 @@ import { executeTests } from './testes.js';
     function increment() {
         store.dispatch({ type: 'INCREMENT' });
     }
+
+    function render() {
+        $counter.textContent = store.getState();    
+    }
     
-    store.subscribe(() => {
-        const state = store.getState();
-        $counter.textContent = state;
+    const unsubscribe = store.subscribe(() => {
+        // const state = store.getState();
+        // $counter.textContent = state;
+        render();
     });
 
+    render();
     executeTests(counter);
+
+    setTimeout(() => {
+        console.log('unsubscribe');
+        unsubscribe();
+    }, 5000);
 })();
