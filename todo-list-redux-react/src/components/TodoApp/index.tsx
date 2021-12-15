@@ -95,7 +95,7 @@ export default function TodoApp() {
                     </li>
                 ))}
             </ul>
-            {tasks.length > 4 ? (<div>
+            {tasks.length > tasksPerPage ? (<div>
                 <button onClick={() => handlePrevPage()} disabled={currentPage === 1}>prev</button>
                 <button onClick={() => handleNextPage()} disabled={currentPage === totalPages}>next</button>
             </div>) : <></>}
