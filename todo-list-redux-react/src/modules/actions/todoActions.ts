@@ -16,3 +16,8 @@ export const updateTask = (index: number, name: string) => ({
     index, 
     payload: name
 });
+
+export const updateCompletedTask = (index: number) => ({
+    type: types.UPDATE_COMPLETED_TASK,
+    index
+})

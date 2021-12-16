@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { createTask, removeTask, updateTask } from "../../modules/actions/todoActions";
+import { useDispatch, useSelector, useStore } from "react-redux";
+import { createTask, removeTask, updateCompletedTask, updateTask } from "../../modules/actions/todoActions";
 import { StateType } from "../../modules/types";
 
 export default function TodoApp() {
@@ -23,7 +23,7 @@ export default function TodoApp() {
     });
 
     const handleCreateTask = () => {
-        const task = { name };
+        const task = { name, completed: false };
         dispatch(createTask(task));
     };
 
@@ -78,7 +78,7 @@ export default function TodoApp() {
             </div>
             <ul>
                 {tasks.slice(startEnd.start, startEnd.end).map((task, index) => (
-                    <li key={index}>
+                    <li key={new Date().getTime()} style={task.completed ? { textDecoration: 'line-through' } : { textDecoration: 'none' }}>
                         {task.name}
                         <button onClick={() => handleDeleteTask(index)}>X</button>
                         <button 
@@ -92,6 +92,7 @@ export default function TodoApp() {
                         >
                             edit
                         </button>
+                        <button onClick={() => dispatch(updateCompletedTask(index))}>{!task.completed ? 'finish task' : 'open task'}</button>
                     </li>
                 ))}
             </ul>

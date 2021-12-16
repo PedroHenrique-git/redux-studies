@@ -3,6 +3,7 @@ import * as types from '../types/index';
 
 export type TaskType = {
     name: string;
+    completed: boolean;
 };
 
 let tasks: TaskType[] = [];
@@ -33,6 +34,14 @@ export default function todoReducer(state = initialState, action: actionType) {
         case types.UPDATE_TASK: return state.map((task, index) => {
             if( index === action.index ) {
                 task.name = String(action.payload);
+                return task;
+            }
+            return task;
+        });
+
+        case types.UPDATE_COMPLETED_TASK: return state.map((task, index) => {
+            if( index === action.index ) {
+                task.completed = !task.completed;
                 return task;
             }
             return task;
