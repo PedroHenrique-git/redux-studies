@@ -1,0 +1,28 @@
+form {
+    margin: 100px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form input {
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid #cecece;
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+form button {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid #cecece;
+}
+
+form button:hover {
+    transition: opacity 300ms ease-in-out;
+    opacity: .7;
+}
