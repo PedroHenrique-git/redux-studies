@@ -1,4 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootStateOrAny } from "react-redux";
+import { AnyAction } from "redux";
+import { ThunkAction } from "redux-thunk";
+import fetchJson from "../../data/fetchJson";
 
 export type  addressType = {
     id: number;
@@ -28,6 +32,19 @@ const addressSlice = createSlice({
         }   
     }
 });
+
+export const asyncAddAddress = (cep: string): ThunkAction<void, RootStateOrAny, unknown, AnyAction> => {
+    return async (dispatch) => {
+        try {
+            const randomId = Math.ceil(Math.random() * 10000000);
+            const address = await fetchJson<addressType>(`https://viacep.com.br/ws/${cep}/json/`);
+            address.id = randomId;
+            dispatch(addAddress(address));
+        } catch(err) {
+            console.log(err);
+        }
+    }
+}
 
 export const { addAddress, removeAddress } = addressSlice.actions;
 export default addressSlice.reducer;
