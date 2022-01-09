@@ -1,0 +1,15 @@
+.loading {
+    font-size: 3rem;
+    text-transform: uppercase;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #cecece;
+    opacity: .8;
+}
